@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.ferin.airtimeatm.conf.database.ManageDatabase;
+import com.example.ferin.airtimeatm.conf.util.App;
 import com.example.ferin.airtimeatm.domain.networkCodes.NetworkCodes;
 import com.example.ferin.airtimeatm.repository.networkCodes.NetworkCodesRepository;
 import com.example.ferin.airtimeatm.conf.database.DBConstants;
@@ -32,17 +34,6 @@ public class NetworkCodesRepositoryImpl extends SQLiteOpenHelper implements Netw
     public static final String COLUMN_TRANSFER = "transfer";
 
     // Database creation sql statement
-
-    private static final String DATABASE_CREATE = " CREATE TABLE "
-            + TABLE_NAME + "("
-            + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_NETWORKNAME + " TEXT  NOT NULL , "
-            + COLUMN_BALANCE + " TEXT  NOT NULL , "
-            + COLUMN_PCM + " TEXT  NOT NULL , "
-            + COLUMN_RECHARGE + " TEXT  NOT NULL , "
-            + COLUMN_MENU + " TEXT  NOT NULL , "
-            + COLUMN_TRANSFER + " TEXT NOT NULL );";
-
 
     public NetworkCodesRepositoryImpl(Context context) {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
@@ -178,7 +169,10 @@ public class NetworkCodesRepositoryImpl extends SQLiteOpenHelper implements Netw
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE);
+       // db.execSQL(DATABASE_CREATE);
+        ManageDatabase manageDatabase = new ManageDatabase(App.getInstance());
+        manageDatabase.deleteTable("networkCodes");
+        manageDatabase.onCreate(db);
     }
 
     @Override

@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.ferin.airtimeatm.conf.database.ManageDatabase;
+import com.example.ferin.airtimeatm.conf.util.App;
 import com.example.ferin.airtimeatm.domain.appUser.AppUser;
 import com.example.ferin.airtimeatm.domain.network.CellphoneNetwork;
 import com.example.ferin.airtimeatm.repository.appUser.AppUserRepository;
@@ -28,16 +30,6 @@ public class AppUserRepositoryImpl extends SQLiteOpenHelper implements AppUserRe
     public static final String COLUMN_ANDROIDID = "androidID";
     public static final String COLUMN_NETWORKNAME = "networkName";
     //public static final String COLUMN_NETWORKCODE = "networkCode";
-
-    // Database creation sql statement
-    private static final String DATABASE_CREATE = " CREATE TABLE "
-            + TABLE_NAME + "("
-            + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_CELLPHONENUMBER + " TEXT  NOT NULL , "
-            + COLUMN_NETWORKNAME + " TEXT  NOT NULL , "
-            //+ COLUMN_NETWORKCODE + " TEXT  NOT NULL , "
-            + COLUMN_ANDROIDID + " TEXT UNIQUE NOT NULL );";
-
 
     public AppUserRepositoryImpl(Context context)
     {
@@ -177,7 +169,11 @@ public class AppUserRepositoryImpl extends SQLiteOpenHelper implements AppUserRe
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE);
+       // db.execSQL(DATABASE_CREATE);
+
+        ManageDatabase manageDatabase = new ManageDatabase(App.getInstance());
+        manageDatabase.deleteTable("appUser");
+        manageDatabase.onCreate(db);
     }
 
     @Override
