@@ -59,6 +59,12 @@ public class NetworkCodesRepositoryTest extends AndroidTestCase {
         networkCodesRepository.delete(updateEntity);
         NetworkCodes deletedEntity = networkCodesRepository.findById(id);
         Assert.assertNull(deletedEntity);
+
+        // DELETE ALL
+        networkCodesRepository.deleteAll();
+        Set<NetworkCodes> deletedCodes = networkCodesRepository.findAll();
+        Assert.assertTrue(deletedCodes.size() == 0);
+
     }
 
 }

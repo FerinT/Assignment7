@@ -56,5 +56,11 @@ public class AppUserRepositoryTest extends AndroidTestCase{
         AppUser deletedEntity = appUserRepository.findById(id);
         Assert.assertNull(deletedEntity);
 
+
+        // DELETE ALL
+        appUserRepository.deleteAll();
+        Set<AppUser> deletedUsers = appUserRepository.findAll();
+        Assert.assertTrue(deletedUsers.size() == 0);
+
     }
 }
