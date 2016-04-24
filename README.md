@@ -1,6 +1,7 @@
 # Airtime ATM Domain Model
 
-## IntroductionMany poeple in todays society have more than one phone with different cellphone network providers. To remeber the various USSD codes for all these networks has become a tedious and cumbersome task.
+## Introduction
+Many poeple in todays society have more than one phone with different cellphone network providers. To remeber the various USSD codes for all these networks has become a tedious and cumbersome task.
 
 ## Class Diagram of the Domain Model
 
